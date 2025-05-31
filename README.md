@@ -36,8 +36,7 @@ g.D6 → Pin 3
 h.D7 → Pin 2
 
 Tinkercad Stimulation:
-https://www.tinkercad.com/things/8FnycQdlq2H/editel?sharecode=cRKmZHmYo9do66SFORGQPBw7AJn3bbnHtO43UCKY4qQ
-[Click here to view my project in Tinkercad]
+[Click here to view my project in Tinkercad](https://www.tinkercad.com/things/8FnycQdlq2H/editel?sharecode=cRKmZHmYo9do66SFORGQPBw7AJn3bbnHtO43UCKY4qQ)
 
 How to Use:
 Connect the components as per the above wiring. Upload the Arduino code to your board. Power the Arduino using a USB cable or battery. As people walk past the sensor, the count will increase and display on the LCD.
