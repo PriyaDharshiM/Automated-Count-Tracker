@@ -1,0 +1,61 @@
+// Project: Automated Count Tracker
+// Created by: Priyadharshini M
+#include <LiquidCrystal.h>
+
+//initialize the pins
+const int trigPin = 6;
+const int echoPin = 7;
+const int buzzer = 8;
+int count = 0;
+
+//initialize the variables
+long duration;
+int distance;
+bool personDetected = false;
+
+//interfacing the LCD display
+const int rs = 12, en = 11, d4 = 5, d5 = 4, d6 = 3, d7 = 2;
+LiquidCrystal lcd(rs, en, d4, d5, d6, d7);
+
+void setup()
+{
+ //setup code to run once:
+  pinMode(trigPin, OUTPUT);
+  pinMode(echoPin, INPUT);
+  pinMode(buzzer, OUTPUT);
+  
+  lcd.begin(16,2);
+  lcd.setCursor(0, 0);
+  lcd.print("Count Tracker");
+  Serial.begin(9600);
+}
+
+void loop()
+{
+  digitalWrite(trigPin,HIGH);
+  delayMicroseconds(10); // 10us trigger pulse is standard
+  digitalWrite(trigPin,LOW);
+  
+  // Read distance
+  duration = pulseIn(echoPin, HIGH);
+  distance = (duration/2)/29.1;
+  
+  //suppose I have fixed the ultrasonic senser at the distance of 100 cm
+  if (distance <100 && !personDetected)
+  {
+    tone(buzzer,1000);
+    count++;
+    personDetected = true; // mark person detected
+  }
+  else if (distance >= 100 && personDetected) 
+  {
+    noTone(buzzer);
+    personDetected = false; // reset for next person
+  }
+  
+  lcd.setCursor(0,1);
+  lcd.print("No. of Person:");
+  lcd.print(count);
+  lcd.print("   "); // clears extra digits
+  delay(500); // Small delay to avoid rapid detection
+}
